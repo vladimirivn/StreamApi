@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 public class Main {
     public static void main(String[] args) {
 
-        List<Integer> listInteger = List.of(1, 2, 3, 4, -5, 36, 7, 8, 9, 10);
+        List<Integer> listInteger = List.of(1, 1, 1, 4, -5, 36, 7, 8, 9, 10);
 
         System.out.println("---------- Задание 1----------------------");
         findMinMax(listInteger.stream(), Integer::compareTo, (x, y) -> System.out.println("Минимальное число: " + x + "\nМаксимальное число: " + y));
@@ -20,13 +20,14 @@ public class Main {
                                       BiConsumer<? super T, ? super T> minMaxConsumer) {
 
         List<? extends T> list = stream.collect(Collectors.toList());
-        if (!list.isEmpty()) {
-            minMaxConsumer.accept(list.stream().min(order).get(), list.stream().max(order).get());
 
-        } else {
-            minMaxConsumer.accept(null, null);
-        }
-
+//        if (!list.isEmpty()) {
+//            minMaxConsumer.accept(list.stream().min(order).get(), list.stream().max(order).get());
+//
+//        } else {
+//            minMaxConsumer.accept(null, null);
+//        }
+        minMaxConsumer.accept(list.stream().min(order).orElse(null), list.stream().max(order).orElse(null));
     }
 
     public static void numberOfEvenNumbers(List<Integer> list) {
